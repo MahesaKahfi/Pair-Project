@@ -2,6 +2,10 @@ const express = require('express');
 const app = express()
 const router = require('./routers/index');
 const session = require('express-session')
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 3000;
+}
 
 app.set("view engine", "ejs")
 app.use(express.urlencoded({ extended: true }))
@@ -17,6 +21,6 @@ app.use(session({
 
 app.use("/", router)
 
-app.listen(3000, () => {
+app.listen(port, () => {
   console.log("Listening on port 3000");
 })
