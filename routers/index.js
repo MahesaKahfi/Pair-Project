@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 router.get('/', (req, res) => {
-  res.send(`http://localhost:3000${req.url}`);
+  res.send(`https://pair-project-mika-aji.herokuapp.com${req.url}`);
 })
 
 module.exports = router
