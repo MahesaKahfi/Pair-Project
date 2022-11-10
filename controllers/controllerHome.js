@@ -5,7 +5,7 @@ const { Op } = require("sequelize");
 class ControllerHome {
   static getHome(req, res) {
     const { search } = req.query
-    console.log(req.session);
+    let { UserId, role } = req.session
     User.findAll({
       include: [
         {
@@ -18,7 +18,7 @@ class ControllerHome {
       ]
     })
       .then((users) => {
-        res.render("home", { users })
+        res.render("home", { users, UserId, role })
       })
       .catch((err) => {
         res.send(err)
@@ -26,7 +26,7 @@ class ControllerHome {
   }
 
   static getAdd(req, res) {
-    console.log(req.session);
+    let { UserId, role } = req.session
     Profile.findAll({
       include: {
         model: User,
@@ -34,7 +34,7 @@ class ControllerHome {
       }
     })
       .then((profiles) => {
-        res.render("addPost", { profiles })
+        res.render("addPost", { profiles, UserId, role })
       })
       .catch((err) => {
         res.send(err)
