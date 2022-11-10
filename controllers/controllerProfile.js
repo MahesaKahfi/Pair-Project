@@ -4,11 +4,13 @@ const bcrypt = require('bcryptjs');
 class ControllerProfile {
   static getProfile(req, res) {
     const { UserId } = req.session
+    const { search } = req.query
 
-    User.findByPk(2, {
+    User.findByPk(UserId, {
       include: [
         {
           model: Post,
+          where: search ? Post.searchPost(search) : {}
         },
         {
           model: Profile
@@ -26,7 +28,7 @@ class ControllerProfile {
   static getProfileEdit(req, res) {
     const { UserId } = req.session
 
-    Profile.findOne({ where: { UserId: 2 } })
+    Profile.findOne({ where: { UserId: UserId } })
       .then((profile) => {
         res.render("editProfile", { profile })
       })
@@ -41,7 +43,7 @@ class ControllerProfile {
 
     Profile.update(
       { fullName, phoneNumber, dateOfBirth, email, address },
-      { where: { UserId: 2 } }
+      { where: { UserId: UserId } }
     )
       .then((result) => {
         res.redirect("/profile")
