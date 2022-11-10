@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("./partials/head") %>
+
+  <body>
+    <%- include("./partials/navbar") %>
+      <h1>register page</h1>
+      <div class="container-md">
+        <form class="row g-3">
+          <div class="col-md-12">
+            <input type="text" name="fullName" class="form-control" placeholder="Full Name" aria-label="Full Name">
+          </div>
+          <div class="col-md-6">
+            <input type="text" name="username" class="form-control" placeholder="User Name" aria-label="Full Name">
+          </div>
+          <div class="col-md-6">
+            <input type="date" class="form-control" name="dateOfBirth">
+          </div>
+          <div class="col-md-6">
+            <input type="email" class="form-control" name="email" placeholder="Email">
+          </div>
+          <div class="col-md-6">
+            <input type="password" class="form-control" name="password" placeholder="Password">
+          </div>
+          <div class="col-12">
+            <input type="text" class="form-control" name="address" placeholder="Address">
+          </div>
+          <button type="submit" class="btn btn-primary col-12">Sign up</button>
+      </div>
+      </form>
+      </div>
+  </body>
+
+</html>
