@@ -1,17 +1,25 @@
 const { User, Profile, Post } = require('../models/index');
 const bcrypt = require('bcryptjs');
+const { Op } = require("sequelize");
 
 class ControllerHome {
   static getHome(req, res) {
-    console.log(req.session);
-    Profile.findAll({
-      include: {
-        model: User,
-        include: Post
-      }
+    const { search } = req.query
+    console.log(req.query);
+
+    User.findAll({
+      include: [
+        {
+          model: Post,
+          where: search ? { title: { [Op.iLike]: `%${search}%` } } : {}
+        },
+        {
+          model: Profile
+        }
+      ]
     })
-      .then((profiles) => {
-        res.render("home", { profiles })
+      .then((users) => {
+        res.render("home", { users })
       })
       .catch((err) => {
         res.send(err)
@@ -32,6 +40,41 @@ class ControllerHome {
       .catch((err) => {
         res.send(err)
       });
+  }
+
+  static postAdd(req, res) {
+    const { title, imageUrl, description } = req.body
+    const { userId } = req.session
+
+    Post.create({ title, imageUrl, description, UserId: userId })
+      .then(() => {
+        res.redirect("/home")
+      }).catch((err) => {
+        console.log(err);
+        res.send(err)
+      });
+  }
+
+  static getProfile(req, res) {
+
+  }
+
+  static getDeletePost(req, res) {
+    const { id } = req.params
+    const { userId } = req.session
+
+    Post.destroy({
+      where: {
+        id: id,
+        UserId: userId
+      }
+    })
+      .then(() => {
+        res.redirect("/home")
+      })
+      .catch((err) => {
+        res.send(err)
+      })
   }
 }
 
