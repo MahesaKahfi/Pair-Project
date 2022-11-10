@@ -9,7 +9,13 @@ router.get('/', (req, res) => {
 })
 router.use('/login', routeLogin)
 router.use('/register', routeRegister)
-router.use('/logout', routeLogout)
-router.use('/home', routeHome)
+router.use('/home', (req, res) => {
+  if (!req.session.UserId) res.redirect('/login')
+  else routeHome
+})
+router.use('/logout', (req, res) => {
+  if (!req.session.UserId) res.redirect('/login')
+  else routeLogin
+})
 
 module.exports = router

@@ -27,6 +27,7 @@ class ControllerHome {
   }
 
   static getAdd(req, res) {
+    console.log(req.session);
     Profile.findAll({
       include: {
         model: User,
