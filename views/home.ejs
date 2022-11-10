@@ -5,17 +5,19 @@
 
   <body>
     <%- include("./partials/navbar") %>
-      <div class="container-sm">
-        <% profiles.forEach(profile=> { %>
-          <% profile.User.Posts.forEach(el=> { %>
+      <div class="container-sm mt-5">
+        <% users.forEach(user=> { %>
+          <% user.Posts.forEach(el=> { %>
             <div class="row mb-3">
               <div class="col-sm-12">
                 <div class="card">
                   <nav class="navbar bg-light">
-                    <div class="container">
+                    <div class="container d-flex justify-content-between">
                       <a class="navbar-brand" href="#">
-                        <%= profile.User.username %>
+                        <%= user.username %>
                       </a>
+                      <a type="submit" class="btn btn-outline-danger p-0" style="height: 25px; width: 25px;"
+                        href="/home/delete/<%= el.id %>">x</a>
                     </div>
                   </nav>
                   <img src="<%= el.imageUrl %>" class="card-img-top" alt="...">

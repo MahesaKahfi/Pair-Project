@@ -5,7 +5,7 @@ let routeLogout = require('./routeLogout');
 let routeHome = require('./routeHome');
 
 router.get('/', (req, res) => {
-  res.send('landing page')
+  res.render('landing')
 })
 router.use('/login', routeLogin)
 router.use('/register', routeRegister)
