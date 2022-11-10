@@ -16,8 +16,9 @@
                       <a class="navbar-brand" href="/home/profile">
                         <%= user.username %>
                       </a>
-                      <a type="submit" class="btn btn-outline-danger p-0" style="height: 25px; width: 25px;"
-                        href="/home/delete/<%= el.id %>">x</a>
+                      <% if ( UserId === el.UserId || role === 'admin') { %>
+                        <a type="submit" class="btn btn-outline-danger p-0" style="height: 25px; width: 25px;" href="/home/delete/<%= el.id %>">x</a>
+                      <% } %>
                     </div>
                   </nav>
                   <img src="<%= el.imageUrl %>" class="card-img-top" alt="...">
@@ -29,7 +30,7 @@
                     </div>
                     <div class="col-sm-2">
                       <p>
-                        <%= toHourAndMinute(el.createdAt) %>
+                        <%= postTime(el.createdAt) %>
                       </p>
                     </div>
                     <div class="col-sm-12">
@@ -42,7 +43,7 @@
               </div>
             </div>
             <% }) %>
-              <% }) %>
+          <% }) %>
       </div>
   </body>
 

@@ -82,10 +82,6 @@ module.exports = (sequelize, DataTypes) => {
         },
         notEmpty: {
           msg: `Date of Birth cannot be empty`
-        },
-        isBefore: {
-          args: `${new Date().getFullYear() - 18}-01-01`,
-          msg: `Minimum age must be 18`
         }
       }
     },
