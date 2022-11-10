@@ -10,6 +10,14 @@ router.get('/', (req, res) => {
 })
 router.use('/login', routeLogin)
 router.use('/register', routeRegister)
+router.use((req, res, next) => {
+  if (!req.session.UserId) {
+    let error = `Please Login First`
+    res.redirect(`/login?error=${error}`)
+  } else {
+    next()
+  }
+})
 router.use('/home', routeHome)
 router.use('/logout', routeLogout)
 router.use('/profile', routeProfile)

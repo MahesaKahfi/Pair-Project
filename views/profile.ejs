@@ -18,7 +18,7 @@
             </a>
           </div>
           <div class="col-sm-6">
-            <button type="button" class="btn btn-outline-secondary">Share Profile</button>
+            <img src="<%= qr_code %>">
           </div>
           <div class="col-sm-6">
             <p>
@@ -41,14 +41,14 @@
             </p>
           </div>
         </div>
-        <% if (!posts.length) { %>
+        <% if (!user.Posts.length) { %>
           <h5 style="color: rgb(110, 11, 11);">
             There is no post
             <a href="/home/add">click this</a>
             for add new post.
           </h5>
           <% } else { %>
-            <% posts.forEach(el=> { %>
+            <% user.Posts.forEach(el=> { %>
               <div class="row mb-3">
                 <div class="col-sm-12">
                   <div class="card">

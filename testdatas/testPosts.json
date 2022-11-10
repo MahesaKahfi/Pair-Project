@@ -1,0 +1,38 @@
+[
+  {
+    "title": "Sebelum MMA",
+    "imageUrl": "https://pbs.twimg.com/ext_tw_video_thumb/1561929567299706886/pu/img/YDHy5-enZqJD_1Um.jpg:large",
+    "description": "saya sebelum bertarung mma melawan becak lawu",
+    "UserId": 2
+  },
+  {
+    "title": "Sedang mengajar",
+    "imageUrl": "https://blog.hacktiv8.com/content/images/2020/11/7.jpg",
+    "description": "yakali gk join Hacktiv8",
+    "UserId": 3
+  },
+  {
+    "title": "Mau bikin resto gais",
+    "imageUrl": "https://preview.redd.it/epiy74k33bl91.jpg?width=640&crop=smart&auto=webp&s=c169efd559cf4145713eb9b41761a9be8042350c",
+    "description": "Beli burger disini dapet 2 seringgit",
+    "UserId": 3
+  },
+  {
+    "title": "Tempat KKN",
+    "imageUrl": "https://pbs.twimg.com/media/EDNzBvfUYAAVpWa.jpg",
+    "description": "mau kkn dulu disini",
+    "UserId": 1
+  },
+  {
+    "title": "'Saya tembak kamu'",
+    "imageUrl": "https://rmol.id/images/berita/normal/2022/09/313206_10544409092022_rocky_gerung_nembak.jpg",
+    "description": "DUAR MEM...",
+    "UserId": 2
+  },
+  {
+    "title": "Binatang apa ini gais?",
+    "imageUrl": "https://pbs.twimg.com/media/EZWjbmoVcAIMaeC.jpg",
+    "description": "ketemu binatang ini pas mau benerin sungai mampet",
+    "UserId": 1
+  }
+]

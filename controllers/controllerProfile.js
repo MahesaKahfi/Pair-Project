@@ -1,31 +1,37 @@
 const { User, Profile, Post } = require('../models/index');
+const qrcode = require("qrcode")
 
 class ControllerProfile {
   static getProfile(req, res) {
     const { UserId } = req.session
-    const { search } = req.query
-
-    let user
-
-    User.findByPk(2, { include: Profile })
-      .then((result) => {
-        user = result
-        return Post.findAll({ where: { UserId: 2 } })
-      })
-      .then((posts) => {
-        // res.send(posts)
-        res.render("profile", { user, posts })
-      })
-      .catch((err) => {
-        console.log(err);
-        res.send(err)
-      });
+    let str = `https://pair-project-mika-aji.herokuapp.com/${req.originalUrl}`
+    qrcode.toDataURL(str, (err, src) => {
+      if (err) res.send("Something went wrong!!");
+      else {
+        console.log(src);
+        User.findByPk(UserId, {
+          include: [
+            {
+              model: Post,
+            },
+            {
+              model: Profile
+            }
+          ]
+        })
+          .then((user) => {
+            res.render("profile", { user, qr_code: src })
+          })
+          .catch((err) => {
+            res.send(err)
+          });
+      }
+    })
   }
-
   static getProfileEdit(req, res) {
     const { UserId } = req.session
 
-    Profile.findOne({ where: { UserId: UserId } })
+    Profile.findOne({ where: { UserId } })
       .then((profile) => {
         res.render("editProfile", { profile })
       })
