@@ -1,10 +1,10 @@
 const { User, Profile } = require('../models/index');
 const bcrypt = require('bcryptjs');
 
-class Controller {
+class ControllerLogin {
   static getLogin(req, res) {
-    
+    res.render('login')
   }
 }
 
-module.exports = Controller
+module.exports = ControllerLogin
