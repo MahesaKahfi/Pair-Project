@@ -10,11 +10,24 @@ class ControllerHome {
       }
     })
       .then((profiles) => {
-        // res.send(profiles)
         res.render("home", { profiles })
       })
       .catch((err) => {
-        console.log(err);
+        res.send(err)
+      });
+  }
+
+  static getAdd(req, res) {
+    Profile.findAll({
+      include: {
+        model: User,
+        include: Post
+      }
+    })
+      .then((profiles) => {
+        res.render("addPost", { profiles })
+      })
+      .catch((err) => {
         res.send(err)
       });
   }

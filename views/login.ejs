@@ -4,30 +4,28 @@
 <%- include("./partials/head") %>
 
   <body>
-    <%- include("./partials/navbar") %>
-      <h1>login page</h1>
-      <div class="container-md">
-        <form method="post">
-          <div class="row mb-3">
-            <div class="col-sm-12">
-              <input type="text" class="form-control" name="username"
-                placeholder="username">
-            </div>
+    <h1>login page</h1>
+    <div class="container-md">
+      <form method="post">
+        <div class="row mb-3">
+          <div class="col-sm-12">
+            <input type="text" class="form-control" name="username" placeholder="username">
           </div>
-          <div class="row mb-3">
-            <div class="col-sm-12">
-              <input type="password" class="form-control" name="password" placeholder="password">
-            </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-sm-12">
+            <input type="password" class="form-control" name="password" placeholder="password">
           </div>
-          <div class="row mb-3">
-            <a href="#">Forgotten your password?</a>
-          </div>
-          <button type="submit" class="btn btn-primary col-sm-12">Log in</button>
-          <div>
-            Don't have an account <a href="/register">Sign up</a>
-          </div>
-        </form>
-      </div>
+        </div>
+        <div class="row mb-3">
+          <a href="#">Forgotten your password?</a>
+        </div>
+        <button type="submit" class="btn btn-primary col-sm-12">Log in</button>
+        <div>
+          Don't have an account <a href="/register">Sign up</a>
+        </div>
+      </form>
+    </div>
   </body>
 
 </html>
