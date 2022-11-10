@@ -5,9 +5,9 @@ const postTime = require('./helper/postTime');
 
 class ControllerHome {
   static getHome(req, res) {
-    console.log(req.session);
     const { search } = req.query
     const { UserId, role } = req.session
+    let users
     User.findAll({
       include: [
         {
@@ -19,8 +19,13 @@ class ControllerHome {
         }
       ]
     })
-      .then((users) => {
-        res.render("home", { users, UserId, role, postTime })
+      .then((result) => {
+        users = result
+        return Profile.findAll()
+      })
+      .then(profiles => {
+        // res.send(profiles)
+        res.render("home", { users, UserId, role, profiles, postTime })
       })
       .catch((err) => {
         res.send(err)

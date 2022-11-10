@@ -32,6 +32,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notNull: true,
         notEmpty: true,
+        len: [8,10]
       }
     },
     role: {
