@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("./partials/head") %>
+
+  <body>
+    <%- include("./partials/navbar") %>
+      <div class="container-md mt-5">
+        <form method="post" class="row g-3">
+          <div class="col-sm-6">
+            <input type="text" class="form-control" name="title" placeholder="Title">
+          </div>
+          <div class="col-sm-6">
+            <input type="url" class="form-control" name="imageUrl" placeholder="Image URL">
+          </div>
+          <div class="col-sm-12">
+            <input type="text" class="form-control" name="description" placeholder="Description">
+          </div>
+          <div class="col-sm-12">
+            <button type="submit" class="btn btn-primary col-sm-12">Submit</button>
+          </div>
+        </form>
+      </div>
+  </body>
+
+</html>
