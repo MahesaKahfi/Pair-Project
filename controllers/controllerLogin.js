@@ -16,13 +16,15 @@ class ControllerLogin {
     })
     .then((user) => {
       if (user) {
+        // console.log(user);
         let checkPassword = bcrypt.compareSync(password, user.password)
         if (checkPassword) {
           req.session.regenerate(err => {
             if (err) {
               res.send(err)
             } else {
-              req.session.userId = user.id
+              req.session.UserId = user.id
+              req.session.role = user.role
               req.session.save(err => {
                 if (err) {
                   res.send(err)
