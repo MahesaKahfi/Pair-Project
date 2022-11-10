@@ -1,0 +1,26 @@
+[
+  {
+    "fullName": "Joko Jonathan",
+    "phoneNumber": "08123456789",
+    "email": "joko@mail.com",
+    "address": "Jl. Krusty Krab no.42",
+    "dateOfBirth": "1985-11-24 07:00:00.000 +0700",
+    "UserId": 1
+  },
+  {
+    "fullName": "Herman Suherman",
+    "phoneNumber": "08188182875",
+    "email": "herman@mail.com",
+    "address": "Jl. bersama mantan no.12A",
+    "dateOfBirth": "1997-03-11 07:00:00.000 +0700",
+    "UserId": 2
+  },
+  {
+    "fullName": "Christiawan Johnson",
+    "phoneNumber": "08182461292",
+    "email": "christiawan@mail.com",
+    "address": "Jl. berdua mertua no.29D",
+    "dateOfBirth": "2000-08-30 07:00:00.000 +0700",
+    "UserId": 3
+  }
+]

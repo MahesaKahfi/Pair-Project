@@ -6,7 +6,7 @@ const toHourAndMinute = require('./helper/toHourAndMinute');
 class ControllerHome {
   static getHome(req, res) {
     const { search } = req.query
-
+    let { UserId, role } = req.session
     User.findAll({
       include: [
         {
@@ -19,7 +19,7 @@ class ControllerHome {
       ]
     })
       .then((users) => {
-        res.render("home", { users, toHourAndMinute })
+        res.render("home", { users, UserId, role, toHourAndMinute })
       })
       .catch((err) => {
         res.send(err)
@@ -27,6 +27,7 @@ class ControllerHome {
   }
 
   static getAdd(req, res) {
+    let { UserId, role } = req.session
     Profile.findAll({
       include: {
         model: User,
@@ -34,7 +35,7 @@ class ControllerHome {
       }
     })
       .then((profiles) => {
-        res.render("addPost", { profiles })
+        res.render("addPost", { profiles, UserId, role })
       })
       .catch((err) => {
         res.send(err)
