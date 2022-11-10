@@ -6,34 +6,67 @@
   <body>
     <%- include("./partials/navbar") %>
       <div class="container-sm mt-5">
-        <% users.forEach(user=> { %>
-          <% user.Posts.forEach(el=> { %>
-            <div class="row mb-3">
-              <div class="col-sm-12">
-                <div class="card">
-                  <nav class="navbar bg-light">
-                    <div class="container d-flex justify-content-between">
-                      <a class="navbar-brand" href="#">
-                        <%= user.username %>
-                      </a>
-                      <a type="submit" class="btn btn-outline-danger p-0" style="height: 25px; width: 25px;"
-                        href="/home/delete/<%= el.id %>">x</a>
-                    </div>
-                  </nav>
-                  <img src="<%= el.imageUrl %>" class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">
-                      <%= el.title %>
-                    </h5>
-                    <p class="card-text">
-                      <%= el.description %>
-                    </p>
+        <div class="row mb-3">
+          <div class="col-sm-12">
+            <h1>
+              <%= user.username %>
+            </h1>
+          </div>
+          <div class="col-sm-6">
+            <a href="/profile/edit">
+              <button type="button" class="btn btn-outline-secondary">Edit Profile</button>
+            </a>
+          </div>
+          <div class="col-sm-6">
+            <button type="button" class="btn btn-outline-secondary">Share Profile</button>
+          </div>
+          <div class="col-sm-6">
+            <p>
+              <%= user.Profile.fullName %>
+            </p>
+          </div>
+          <div class="col-sm-6">
+            <p>
+              <%= user.Profile.email %>
+            </p>
+          </div>
+          <div class="col-sm-6">
+            <p>
+              <%= user.Profile.address %>
+            </p>
+          </div>
+          <div class="col-sm-6">
+            <p>
+              <%= new Date(user.Profile.dateOfBirth).toString().slice(4,15) %>
+            </p>
+          </div>
+        </div>
+        <% user.Posts.forEach(el=> { %>
+          <div class="row mb-3">
+            <div class="col-sm-12">
+              <div class="card">
+                <nav class="navbar bg-light">
+                  <div class="container d-flex justify-content-between">
+                    <a class="navbar-brand" href="#">
+                      <%= user.username %>
+                    </a>
+                    <a type="submit" class="btn btn-outline-danger p-0" style="height: 25px; width: 25px;"
+                      href="/home/delete/<%= el.id %>">x</a>
                   </div>
+                </nav>
+                <img src="<%= el.imageUrl %>" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    <%= el.title %>
+                  </h5>
+                  <p class="card-text">
+                    <%= el.description %>
+                  </p>
                 </div>
               </div>
             </div>
-            <% }) %>
-              <% }) %>
+          </div>
+          <% }) %>
       </div>
   </body>
 

@@ -1,11 +1,11 @@
 const { User, Profile, Post } = require('../models/index');
 const bcrypt = require('bcryptjs');
 const { Op } = require("sequelize");
+const toHourAndMinute = require('./helper/toHourAndMinute');
 
 class ControllerHome {
   static getHome(req, res) {
     const { search } = req.query
-    console.log(req.session);
     User.findAll({
       include: [
         {
@@ -26,7 +26,6 @@ class ControllerHome {
   }
 
   static getAdd(req, res) {
-    console.log(req.session);
     Profile.findAll({
       include: {
         model: User,
@@ -43,9 +42,9 @@ class ControllerHome {
 
   static postAdd(req, res) {
     const { title, imageUrl, description } = req.body
-    const { userId } = req.session
+    const { UserId } = req.session
 
-    Post.create({ title, imageUrl, description, UserId: userId })
+    Post.create({ title, imageUrl, description, UserId })
       .then(() => {
         res.redirect("/home")
       }).catch((err) => {
@@ -54,35 +53,14 @@ class ControllerHome {
       });
   }
 
-  static getProfile(req, res) {
-    const { userId } = req.session
-
-    User.findByPk(userId, {
-      include: [
-        {
-          model: Post,
-        },
-        {
-          model: Profile
-        }
-      ]
-    })
-      .then((user) => {
-        res.render("profile", { user })
-      })
-      .catch((err) => {
-        res.send(err)
-      });
-  }
-
   static getDeletePost(req, res) {
     const { id } = req.params
-    const { userId } = req.session
+    const { UserId } = req.session
 
     Post.destroy({
       where: {
         id: id,
-        UserId: userId
+        UserId: UserId
       }
     })
       .then(() => {
