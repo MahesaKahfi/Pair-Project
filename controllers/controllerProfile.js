@@ -4,11 +4,13 @@ const bcrypt = require('bcryptjs');
 class ControllerProfile {
   static getProfile(req, res) {
     const { UserId } = req.session
+    const { search } = req.query
 
-    User.findByPk(2, {
+    User.findByPk(UserId, {
       include: [
         {
           model: Post,
+          where: search ? Post.searchPost(search) : {}
         },
         {
           model: Profile
@@ -16,6 +18,7 @@ class ControllerProfile {
       ]
     })
       .then((user) => {
+        // res.send(user)
         res.render("profile", { user })
       })
       .catch((err) => {
@@ -26,7 +29,7 @@ class ControllerProfile {
   static getProfileEdit(req, res) {
     const { UserId } = req.session
 
-    Profile.findOne({ where: { UserId: 2 } })
+    Profile.findOne({ where: { UserId: UserId } })
       .then((profile) => {
         res.render("editProfile", { profile })
       })
@@ -41,7 +44,7 @@ class ControllerProfile {
 
     Profile.update(
       { fullName, phoneNumber, dateOfBirth, email, address },
-      { where: { UserId: 2 } }
+      { where: { UserId: UserId } }
     )
       .then((result) => {
         res.redirect("/profile")
@@ -49,7 +52,24 @@ class ControllerProfile {
       .catch((err) => {
         res.send(err)
       });
+  }
 
+  static getDeletePost(req, res) {
+    const { id } = req.params
+    const { UserId } = req.session
+
+    Post.destroy({
+      where: {
+        id: id,
+        UserId: UserId
+      }
+    })
+      .then(() => {
+        res.redirect("/profile")
+      })
+      .catch((err) => {
+        res.send(err)
+      })
   }
 }
 

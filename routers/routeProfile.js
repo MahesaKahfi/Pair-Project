@@ -1,9 +1,10 @@
-const ControllerProfile = require('../controllers/controllerProfile');
+const Controller = require('../controllers/controllerProfile');
 
 const router = require('express').Router();
 
-router.get('/', ControllerProfile.getProfile)
-router.get('/edit', ControllerProfile.getProfileEdit)
-router.post('/edit', ControllerProfile.postProfileEdit)
+router.get('/', Controller.getProfile)
+router.get('/edit', Controller.getProfileEdit)
+router.post('/edit', Controller.postProfileEdit)
+router.get('/delete/:id', Controller.getDeletePost)
 
 module.exports = router

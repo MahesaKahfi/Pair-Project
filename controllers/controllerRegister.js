@@ -4,30 +4,40 @@ const bcrypt = require('bcryptjs');
 class ControllerRegister {
   static getRegister(req, res) {
     let { errors } = req.query
+    if (errors) {
+      errors = errors.split(",")
+    }
     res.render('register', { errors })
   }
 
   static postRegister(req, res) {
-    // console.log(req.body);
-    let { fullName, phoneNumber, username, dateOfBirth, email, password, address } = req.body
+
+    const { fullName, phoneNumber, username, dateOfBirth, email, password, address } = req.body
     User.create({ username, password })
-    .then((user) => {
-      // console.log(user);
-      Profile.create({
-        fullName,
-        phoneNumber,
-        dateOfBirth,
-        email,
-        address,
-        UserId: user.id
+      .then((user) => {
+        Profile.create({
+          fullName,
+          phoneNumber,
+          dateOfBirth,
+          email,
+          address,
+          UserId: user.id
+        })
       })
-    })
-    .then(() => {
-      res.redirect('/login')
-    })
-    .catch((err) => {
-      res.send(err)
-    });
+      .then(() => {
+        res.redirect('/login')
+      })
+      .catch((err) => {
+        const errors = err.errors.map(el => {
+          return el.message
+        })
+
+        if (errors) {
+          res.redirect(`/register?errors=${errors}`)
+        } else {
+          res.send(err)
+        }
+      });
   }
 }
 
