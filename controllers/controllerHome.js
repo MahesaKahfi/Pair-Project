@@ -1,6 +1,7 @@
 const { User, Profile, Post } = require('../models/index');
 const bcrypt = require('bcryptjs');
 const toHourAndMinute = require('./helper/toHourAndMinute');
+const postTime = require('./helper/postTime');
 
 
 class ControllerHome {
@@ -19,7 +20,7 @@ class ControllerHome {
       ]
     })
       .then((users) => {
-        res.render("home", { users, UserId, role, toHourAndMinute })
+        res.render("home", { users, UserId, role, postTime })
       })
       .catch((err) => {
         res.send(err)
