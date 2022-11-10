@@ -18,6 +18,7 @@ class ControllerProfile {
       ]
     })
       .then((user) => {
+        // res.send(user)
         res.render("profile", { user })
       })
       .catch((err) => {
@@ -51,7 +52,24 @@ class ControllerProfile {
       .catch((err) => {
         res.send(err)
       });
+  }
 
+  static getDeletePost(req, res) {
+    const { id } = req.params
+    const { UserId } = req.session
+
+    Post.destroy({
+      where: {
+        id: id,
+        UserId: UserId
+      }
+    })
+      .then(() => {
+        res.redirect("/profile")
+      })
+      .catch((err) => {
+        res.send(err)
+      })
   }
 }
 
