@@ -8,7 +8,6 @@ class ControllerProfile {
     qrcode.toDataURL(str, (err, src) => {
       if (err) res.send("Something went wrong!!");
       else {
-        console.log(src);
         User.findByPk(UserId, {
           include: [
             {
@@ -63,7 +62,7 @@ class ControllerProfile {
     Post.destroy({
       where: {
         id: id,
-        UserId: 2
+        UserId: UserId
       }
     })
       .then(() => {
