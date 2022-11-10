@@ -1,27 +1,23 @@
 const { User, Profile, Post } = require('../models/index');
-const bcrypt = require('bcryptjs');
 
 class ControllerProfile {
   static getProfile(req, res) {
     const { UserId } = req.session
     const { search } = req.query
 
-    User.findByPk(UserId, {
-      include: [
-        {
-          model: Post,
-          where: search ? Post.searchPost(search) : {}
-        },
-        {
-          model: Profile
-        }
-      ]
-    })
-      .then((user) => {
-        // res.send(user)
-        res.render("profile", { user })
+    let user
+
+    User.findByPk(2, { include: Profile })
+      .then((result) => {
+        user = result
+        return Post.findAll({ where: { UserId: 2 } })
+      })
+      .then((posts) => {
+        // res.send(posts)
+        res.render("profile", { user, posts })
       })
       .catch((err) => {
+        console.log(err);
         res.send(err)
       });
   }
@@ -61,7 +57,7 @@ class ControllerProfile {
     Post.destroy({
       where: {
         id: id,
-        UserId: UserId
+        UserId: 2
       }
     })
       .then(() => {
