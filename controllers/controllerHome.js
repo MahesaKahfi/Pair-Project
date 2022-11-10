@@ -5,8 +5,7 @@ const { Op } = require("sequelize");
 class ControllerHome {
   static getHome(req, res) {
     const { search } = req.query
-    console.log(req.query);
-
+    console.log(req.session);
     User.findAll({
       include: [
         {
