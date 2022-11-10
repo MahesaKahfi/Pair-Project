@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 
 class ControllerHome {
   static getHome(req, res) {
+    console.log(req.session);
     Profile.findAll({
       include: {
         model: User,
@@ -18,6 +19,7 @@ class ControllerHome {
   }
 
   static getAdd(req, res) {
+    console.log(req.session);
     Profile.findAll({
       include: {
         model: User,
