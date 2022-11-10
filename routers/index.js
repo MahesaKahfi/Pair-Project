@@ -1,13 +1,12 @@
-const ControllerLogin = require('../controllers/controllerLogin');
-const ControllerRegister = require('../controllers/controllerRegister');
-
 const router = require('express').Router();
+let routeLogin = require('./routeLogin');
+
 
 router.get('/', (req, res) => {
-  res.send(`https://pair-project-mika-aji.herokuapp.com${req.url}`);
+  res.send('landing page')
 })
 
-router.get('/login', ControllerLogin.getLogin)
+router.use('/login', routeLogin)
 router.get('/register', ControllerRegister.getRegister)
 
 module.exports = router
