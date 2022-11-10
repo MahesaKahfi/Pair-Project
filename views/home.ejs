@@ -6,45 +6,50 @@
   <body>
     <%- include("./partials/navbar") %>
       <div class="container-sm mt-5">
-        <% users.forEach(user=> { %>
-          <% user.Posts.forEach(el=> { %>
-            <div class="row mb-3">
-              <div class="col-sm-12">
-                <div class="card">
-                  <nav class="navbar bg-light">
-                    <div class="container d-flex justify-content-between">
-                      <a class="navbar-brand" href="/home/profile">
-                        <%= role==='admin' ? `${user.username}-${role}` : user.username %>
-                      </a>
-                      <% if ( UserId===el.UserId || role==='admin' ) { %>
-                        <a type="submit" class="btn btn-outline-danger p-0" style="height: 25px; width: 25px;"
-                          href="/home/delete/<%= el.id %>">x</a>
-                        <% } %>
-                    </div>
-                  </nav>
-                  <img src="<%= el.imageUrl %>" class="card-img-top" alt="...">
-                  <div class="card-body row mb-3">
-                    <div class="col-sm-10">
-                      <h5 class="card-title">
-                        <%= el.title %>
-                      </h5>
-                    </div>
-                    <div class="col-sm-2">
-                      <p>
-                        <%= postTime(el.createdAt) %>
-                      </p>
-                    </div>
-                    <div class="col-sm-12">
-                      <p class="card-text">
-                        <%= el.description %>
-                      </p>
+        <% if (role==='admin' ) { %>
+          <div class="alert alert-primary" role="alert">
+            You are logged in as an-admin
+          </div>
+          <% } %>
+            <% users.forEach(user=> { %>
+              <% user.Posts.forEach(el=> { %>
+                <div class="row mb-3">
+                  <div class="col-sm-12">
+                    <div class="card">
+                      <nav class="navbar bg-light">
+                        <div class="container d-flex justify-content-between">
+                          <a class="navbar-brand" href="/home/profile">
+                            <%= user.username %>
+                          </a>
+                          <% if ( UserId===el.UserId || role==='admin' ) { %>
+                            <a type="submit" class="btn btn-outline-danger p-0" style="height: 25px; width: 25px;"
+                              href="/home/delete/<%= el.id %>">x</a>
+                            <% } %>
+                        </div>
+                      </nav>
+                      <img src="<%= el.imageUrl %>" class="card-img-top" alt="...">
+                      <div class="card-body row mb-3">
+                        <div class="col-sm-10">
+                          <h5 class="card-title">
+                            <%= el.title %>
+                          </h5>
+                        </div>
+                        <div class="col-sm-2">
+                          <p>
+                            <%= postTime(el.createdAt) %>
+                          </p>
+                        </div>
+                        <div class="col-sm-12">
+                          <p class="card-text">
+                            <%= el.description %>
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <% }) %>
-              <% }) %>
+                <% }) %>
+                  <% }) %>
       </div>
   </body>
 

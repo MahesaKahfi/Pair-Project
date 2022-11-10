@@ -26,12 +26,15 @@ class ControllerRegister {
       .then(() => {
         res.redirect('/login')
       })
-      .catch((err) => { 
-        // res.send(err.errors);
+      .catch((err) => {
         let errors = err.errors.map(el => {
           return el.message
         })
-        res.send(errors)
+        if (errors) {
+          res.redirect(`/register?errors=${errors}`)
+        } else {
+          res.send(errors)
+        }
       });
   }
 }
