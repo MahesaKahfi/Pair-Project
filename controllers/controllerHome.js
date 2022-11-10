@@ -56,7 +56,24 @@ class ControllerHome {
   }
 
   static getProfile(req, res) {
+    const { userId } = req.session
 
+    User.findByPk(userId, {
+      include: [
+        {
+          model: Post,
+        },
+        {
+          model: Profile
+        }
+      ]
+    })
+      .then((user) => {
+        res.render("profile", { user })
+      })
+      .catch((err) => {
+        res.send(err)
+      });
   }
 
   static getDeletePost(req, res) {
