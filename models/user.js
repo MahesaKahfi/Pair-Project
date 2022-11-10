@@ -20,10 +20,10 @@ module.exports = (sequelize, DataTypes) => {
     username: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
       validate: {
         notNull: true,
         notEmpty: true,
-        unique: true
       }
     },
     password: {
@@ -32,7 +32,10 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notNull: true,
         notEmpty: true,
-        len: [8,10]
+        len: {
+          args: [8, 12],
+          msg: `Password must be between 8 and 10 characters`
+        }
       }
     },
     role: {
