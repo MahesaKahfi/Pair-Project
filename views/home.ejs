@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("./partials/head") %>
+
+  <body>
+    <%- include("./partials/navbar") %>
+      <div class="container-sm">
+        <% profiles.forEach(profile=> { %>
+          <% profile.User.Posts.forEach(el=> { %>
+            <div class="row mb-3">
+              <div class="col-sm-12">
+                <div class="card">
+                  <nav class="navbar bg-light">
+                    <div class="container">
+                      <a class="navbar-brand" href="#">
+                        <%= profile.User.username %>
+                      </a>
+                    </div>
+                  </nav>
+                  <img src="<%= el.imageUrl %>" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <%= el.title %>
+                    </h5>
+                    <p class="card-text">
+                      <%= el.description %>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% }) %>
+              <% }) %>
+      </div>
+  </body>
+
+</html>
