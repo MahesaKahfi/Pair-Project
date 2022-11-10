@@ -15,7 +15,7 @@ function postTime(createdAt) {
               if (Number(newTimeHourArr[2])-Number(postTimeHourArr[2]) === 1) {
                 timeDifference = `${Number(newTimeHourArr[2])-Number(postTimeHourArr[2])} second ago`
               } else {
-                timeDifference = `${Number(newTimeHourArr[2])-Number(postTimeHourArr[2])} second ago`
+                timeDifference = `${Number(newTimeHourArr[2])-Number(postTimeHourArr[2])} seconds ago`
               }
             }
           } else {

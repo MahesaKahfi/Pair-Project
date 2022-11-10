@@ -14,12 +14,13 @@
                   <nav class="navbar bg-light">
                     <div class="container d-flex justify-content-between">
                       <a class="navbar-brand" href="/home/profile">
-                        <%= role==='admin' ? `${user.username}-${role}` : user.username %>
+                        <%= user.username %>
                       </a>
-                      <% if ( UserId===el.UserId || role==='admin' ) { %>
-                        <a type="submit" class="btn btn-outline-danger p-0" style="height: 25px; width: 25px;"
-                          href="/home/delete/<%= el.id %>">x</a>
-                        <% } %>
+                      <% if ( UserId === el.UserId || role === 'admin' ) { %>
+                        <a type="submit" class="btn btn-outline-danger p-0" style="height: 25px; width: 25px;"href="/home/delete/<%= el.id %>">
+                          x
+                        </a>
+                      <% } %>
                     </div>
                   </nav>
                   <img src="<%= el.imageUrl %>" class="card-img-top" alt="...">
@@ -43,8 +44,8 @@
                 </div>
               </div>
             </div>
-            <% }) %>
-              <% }) %>
+          <% }) %>
+        <% }) %>
       </div>
   </body>
 

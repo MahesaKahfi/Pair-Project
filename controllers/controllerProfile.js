@@ -3,7 +3,7 @@ const qrcode = require("qrcode")
 
 class ControllerProfile {
   static getProfile(req, res) {
-    const { UserId } = req.session
+    const { UserId, role } = req.session
     let str = `https://pair-project-mika-aji.herokuapp.com/${req.originalUrl}`
     qrcode.toDataURL(str, (err, src) => {
       if (err) res.send("Something went wrong!!");
@@ -19,7 +19,7 @@ class ControllerProfile {
           ]
         })
           .then((user) => {
-            res.render("profile", { user, qr_code: src })
+            res.render("profile", { user, qr_code: src, role })
           })
           .catch((err) => {
             res.send(err)
@@ -28,11 +28,11 @@ class ControllerProfile {
     })
   }
   static getProfileEdit(req, res) {
-    const { UserId } = req.session
+    const { UserId, role } = req.session
 
     Profile.findOne({ where: { UserId } })
       .then((profile) => {
-        res.render("editProfile", { profile })
+        res.render("editProfile", { profile, role })
       })
       .catch((err) => {
         res.send(err)
