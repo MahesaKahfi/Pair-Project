@@ -1,6 +1,3 @@
-const { User, Profile } = require('../models/index');
-const bcrypt = require('bcryptjs');
-
 class Controller{
   static logout(req, res) {
     req.session.UserId = null

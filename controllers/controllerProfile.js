@@ -4,32 +4,29 @@ const qrcode = require("qrcode")
 class ControllerProfile {
   static getProfile(req, res) {
     const { UserId } = req.session
-     let str = `https://pair-project-mika-aji.herokuapp.com/${req.originalUrl}`
+    let str = `https://pair-project-mika-aji.herokuapp.com/${req.originalUrl}`
     qrcode.toDataURL(str, (err, src) => {
-    if (err) res.send("Something went wrong!!");
-    else {
-      console.log(src);
-      User.findByPk(UserId, {
-        include: [
-          {
-            model: Post,
-          },
-          {
-            model: Profile
-          }
-        ]
-      })
-      .then((user) => {
-        // res.send(user)
-        res.render("profile", { user, qr_code: src })
-      })
-      .catch((err) => {
-        res.send(err)
-      });
+      if (err) res.send("Something went wrong!!");
+      else {
+        User.findByPk(UserId, {
+          include: [
+            {
+              model: Post,
+            },
+            {
+              model: Profile
+            }
+          ]
+        })
+          .then((user) => {
+            res.render("profile", { user, qr_code: src })
+          })
+          .catch((err) => {
+            res.send(err)
+          });
       }
     })
   }
-
   static getProfileEdit(req, res) {
     const { UserId } = req.session
 

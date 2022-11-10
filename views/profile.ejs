@@ -41,32 +41,40 @@
             </p>
           </div>
         </div>
-        <% user.Posts.forEach(el=> { %>
-          <div class="row mb-3">
-            <div class="col-sm-12">
-              <div class="card">
-                <nav class="navbar bg-light">
-                  <div class="container d-flex justify-content-between">
-                    <a class="navbar-brand" href="#">
-                      <%= user.username %>
-                    </a>
-                    <a type="submit" class="btn btn-outline-danger p-0" style="height: 25px; width: 25px;"
-                      href="/profile/delete/<%= el.id %>">x</a>
+        <% if (!user.Posts.length) { %>
+          <h5 style="color: rgb(110, 11, 11);">
+            There is no post
+            <a href="/home/add">click this</a>
+            for add new post.
+          </h5>
+          <% } else { %>
+            <% user.Posts.forEach(el=> { %>
+              <div class="row mb-3">
+                <div class="col-sm-12">
+                  <div class="card">
+                    <nav class="navbar bg-light">
+                      <div class="container d-flex justify-content-between">
+                        <a class="navbar-brand" href="#">
+                          <%= user.username %>
+                        </a>
+                        <a type="submit" class="btn btn-outline-danger p-0" style="height: 25px; width: 25px;"
+                          href="/profile/delete/<%= el.id %>">x</a>
+                      </div>
+                    </nav>
+                    <img src="<%= el.imageUrl %>" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">
+                        <%= el.title %>
+                      </h5>
+                      <p class="card-text">
+                        <%= el.description %>
+                      </p>
+                    </div>
                   </div>
-                </nav>
-                <img src="<%= el.imageUrl %>" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">
-                    <%= el.title %>
-                  </h5>
-                  <p class="card-text">
-                    <%= el.description %>
-                  </p>
                 </div>
               </div>
-            </div>
-          </div>
-          <% }) %>
+              <% }) %>
+                <% } %>
       </div>
   </body>
 
