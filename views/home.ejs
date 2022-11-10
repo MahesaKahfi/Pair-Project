@@ -21,13 +21,22 @@
                     </div>
                   </nav>
                   <img src="<%= el.imageUrl %>" class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">
-                      <%= el.title %>
-                    </h5>
-                    <p class="card-text">
-                      <%= el.description %>
-                    </p>
+                  <div class="card-body row mb-3">
+                    <div class="col-sm-10">
+                      <h5 class="card-title">
+                        <%= el.title %>
+                      </h5>
+                    </div>
+                    <div class="col-sm-2">
+                      <p>
+                        <%= toHourAndMinute(el.createdAt) %>
+                      </p>
+                    </div>
+                    <div class="col-sm-12">
+                      <p class="card-text">
+                        <%= el.description %>
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>

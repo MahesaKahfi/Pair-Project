@@ -1,7 +1,7 @@
 const { User, Profile, Post } = require('../models/index');
 const bcrypt = require('bcryptjs');
-const { Op } = require("sequelize");
 const toHourAndMinute = require('./helper/toHourAndMinute');
+
 
 class ControllerHome {
   static getHome(req, res) {
@@ -11,7 +11,7 @@ class ControllerHome {
       include: [
         {
           model: Post,
-          where: search ? { title: { [Op.iLike]: `%${search}%` } } : {}
+          where: search ? Post.searchPost(search) : {}
         },
         {
           model: Profile
@@ -19,7 +19,7 @@ class ControllerHome {
       ]
     })
       .then((users) => {
-        res.render("home", { users, UserId, role })
+        res.render("home", { users, UserId, role, toHourAndMinute })
       })
       .catch((err) => {
         res.send(err)

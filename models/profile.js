@@ -14,13 +14,13 @@ module.exports = (sequelize, DataTypes) => {
       Profile.belongsTo(models.User)
     }
 
-    static dateOfBirth() {
-      return this.dateOfBirth
+    dateOfBirthFormat() {
+      return new Date(this.dateOfBirth).toISOString().split("T")[0]
     }
   }
   Profile.init({
     fullName: {
-      type : DataTypes.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notNull: {
@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     phoneNumber: {
-      type : DataTypes.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notNull: {
@@ -44,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     email: {
-      type : DataTypes.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       unique: {
         msg: `Email must be unique`
@@ -62,7 +62,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     address: {
-      type : DataTypes.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notNull: {
@@ -74,7 +74,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     dateOfBirth: {
-      type : DataTypes.DATE,
+      type: DataTypes.DATE,
       allowNull: false,
       validate: {
         notNull: {
@@ -84,13 +84,13 @@ module.exports = (sequelize, DataTypes) => {
           msg: `Date of Birth cannot be empty`
         },
         isBefore: {
-          args: `${new Date().getFullYear()-18}-01-01`,
+          args: `${new Date().getFullYear() - 18}-01-01`,
           msg: `Minimum age must be 18`
         }
       }
     },
     UserId: {
-      type : DataTypes.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         notNull: true,

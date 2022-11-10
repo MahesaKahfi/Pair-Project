@@ -48,7 +48,7 @@ class ControllerProfile {
 
     Profile.update(
       { fullName, phoneNumber, dateOfBirth, email, address },
-      { where: { UserId: 2 } }
+      { where: { UserId: UserId } }
     )
       .then((result) => {
         res.redirect("/profile")
@@ -56,7 +56,24 @@ class ControllerProfile {
       .catch((err) => {
         res.send(err)
       });
+  }
 
+  static getDeletePost(req, res) {
+    const { id } = req.params
+    const { UserId } = req.session
+
+    Post.destroy({
+      where: {
+        id: id,
+        UserId: UserId
+      }
+    })
+      .then(() => {
+        res.redirect("/profile")
+      })
+      .catch((err) => {
+        res.send(err)
+      })
   }
 }
 

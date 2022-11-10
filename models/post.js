@@ -1,4 +1,6 @@
 'use strict';
+const { Op } = require("sequelize");
+
 const {
   Model
 } = require('sequelize');
@@ -13,10 +15,14 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Post.belongsTo(models.User)
     }
+
+    static searchPost(search) {
+      return { title: { [Op.iLike]: `%${search}%` } }
+    }
   }
   Post.init({
     title: {
-      type : DataTypes.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notNull: {
@@ -28,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     imageUrl: {
-      type : DataTypes.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notNull: {
@@ -40,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     description: {
-      type : DataTypes.TEXT,
+      type: DataTypes.TEXT,
       allowNull: false,
       validate: {
         notNull: {
@@ -52,7 +58,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     UserId: {
-      type : DataTypes.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         notNull: true,

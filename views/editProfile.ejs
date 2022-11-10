@@ -16,8 +16,7 @@
               aria-label="Phone Number" value="<%= profile.phoneNumber %>">
           </div>
           <div class="col-md-6">
-            <input type="date" class="form-control" name="dateOfBirth"
-              value="<%= new Date(profile.dateOfBirth).toISOString().split("T")[0] %>">
+            <input type="date" class="form-control" name="dateOfBirth" value="<%= profile.dateOfBirthFormat() %>">
           </div>
           <div class="col-md-6">
             <input type="email" class="form-control" name="email" placeholder="Email" value="<%= profile.email %>">
