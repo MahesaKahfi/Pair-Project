@@ -5,7 +5,7 @@ const postTime = require('./helper/postTime');
 
 class ControllerHome {
   static getHome(req, res) {
-    console.log(req.session);
+    // console.log(req.session);
     const { search } = req.query
     const { UserId, role } = req.session
     User.findAll({
@@ -19,12 +19,12 @@ class ControllerHome {
         }
       ]
     })
-      .then((users) => {
-        res.render("home", { users, UserId, role, postTime })
-      })
-      .catch((err) => {
-        res.send(err)
-      });
+    .then((users) => {
+      res.render("home", { users, UserId, role, postTime, home: true })
+    })
+    .catch((err) => {
+      res.send(err)
+    });
   }
 
   static getAdd(req, res) {
@@ -35,12 +35,12 @@ class ControllerHome {
         include: Post
       }
     })
-      .then((profiles) => {
-        res.render("addPost", { profiles, UserId, role })
-      })
-      .catch((err) => {
-        res.send(err)
-      });
+    .then((profiles) => {
+      res.render("addPost", { profiles, UserId, role, home: false })
+    })
+    .catch((err) => {
+      res.send(err)
+    });
   }
 
   static postAdd(req, res) {
@@ -48,11 +48,11 @@ class ControllerHome {
     const { UserId } = req.session
 
     Post.create({ title, imageUrl, description, UserId })
-      .then(() => {
-        res.redirect("/home")
-      }).catch((err) => {
-        res.send(err)
-      });
+    .then(() => {
+      res.redirect("/home")
+    }).catch((err) => {
+      res.send(err)
+    });
   }
 
   static getDeletePost(req, res) {
@@ -65,12 +65,40 @@ class ControllerHome {
         UserId: UserId
       }
     })
-      .then(() => {
-        res.redirect("/home")
-      })
-      .catch((err) => {
+    .then(() => {
+      res.redirect("/home")
+    })
+    .catch((err) => {
+      res.send(err)
+    })
+  }
+
+  static getUsers(req, res) {
+    let { role } = req.session
+    if (role !== 'admin') {
+      res.redirect('/home')
+    } else {
+      User.findAll()
+      .then((data) => {
+        res.render('userList', { data, role, home: true })
+      }).catch((err) => {
         res.send(err)
-      })
+      });
+    }
+  }
+
+  static deleteUser(req, res) {
+    let { id } = req.params
+    User.destroy({
+      where: {
+        id
+      }
+    })
+    .then((result) => {
+      res.redirect('/home/userlist')
+    }).catch((err) => {
+      res.send(err)
+    });
   }
 }
 

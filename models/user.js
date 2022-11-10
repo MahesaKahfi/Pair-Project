@@ -12,15 +12,18 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      User.hasOne(models.Profile)
-      User.hasMany(models.Post)
+      User.hasOne(models.Profile, { onDelete: 'cascade', onUpdate: 'cascade' })
+      User.hasMany(models.Post, { onDelete: 'cascade', onUpdate: 'cascade' })
     }
   }
   User.init({
     username: {
       type : DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: {
+        args: true,
+        msg: `username already taken`
+      },
       validate: {
         notNull: true,
         notEmpty: true,
@@ -46,6 +49,11 @@ module.exports = (sequelize, DataTypes) => {
     const hash = bcrypt.hashSync(instance.password, salt)
     instance.password = hash
     instance.role = 'user'
+  })
+  User.beforeUpdate((instance, options) => {
+    const salt = bcrypt.genSaltSync(8)
+    const hash = bcrypt.hashSync(instance.password, salt)
+    instance.password = hash
   })
   return User;
 };

@@ -1,0 +1,1 @@
+console.log(`${new Date().getFullYear() - 18}-01-01`);

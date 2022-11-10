@@ -13,26 +13,27 @@ class ControllerRegister {
 
     const { fullName, phoneNumber, username, dateOfBirth, email, password, address } = req.body
     User.create({ username, password })
-      .then((user) => {
-        Profile.create({
-          fullName,
-          phoneNumber,
-          dateOfBirth,
-          email,
-          address,
-          UserId: user.id
-        })
+    .then((user) => {
+      Profile.create({
+        fullName,
+        phoneNumber,
+        dateOfBirth,
+        email,
+        address,
+        UserId: user.id
       })
-      .then(() => {
-        res.redirect('/login')
+    })
+    .then(() => {
+      res.redirect('/login')
+    })
+    .catch((err) => { 
+      // res.send(err.errors);
+      let errors = err.errors.map(el => {
+        return el.message
       })
-      .catch((err) => { 
-        // res.send(err.errors);
-        let errors = err.errors.map(el => {
-          return el.message
-        })
-        res.send(errors)
-      });
+      console.log(errors);
+      res.redirect(`/register?errors=${errors}`)
+    });
   }
 }
 

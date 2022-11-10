@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("./partials/head") %>
+
+  <body>
+    <%- include("./partials/navbar") %>
+      <div class="container-sm mt-5">
+        <table class="table">
+          <tr>
+            <th>Username</th>
+            <th>Role</th>
+            <th>Action</th>
+          </tr>
+          <% data.forEach(el => { %>
+           <tr>
+            <td><%= el.username %></td>
+            <td><%= el.role %></td>
+            <td>
+              <% if (el.role === 'user') { %>
+              <a href="/home/deleteuser/<%= el.id %>">
+                <button class="btn btn-danger">Delete</button>
+              </a>
+              <% } else { %>
+              <a>
+                <button class="btn btn-warning">Gabisa</button>
+              </a>
+              <% } %> 
+            </td>
+           </tr>
+          <% }) %>
+        </table>
+      </div>
+  </body>
+
+</html>
