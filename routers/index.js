@@ -8,6 +8,14 @@ let routeProfile = require('./routeProfile');
 router.get('/', (req, res) => {
   res.render('landing')
 })
+router.use((req, res, next) => {
+  if (req.session.UserId) {
+    let error = `Already Logged In`
+    res.redirect(`/home?error=${error}`)
+  } else {
+    next()
+  }
+})
 router.use('/login', routeLogin)
 router.use('/register', routeRegister)
 router.use((req, res, next) => {
