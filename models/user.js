@@ -35,6 +35,10 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notNull: true,
         notEmpty: true,
+        len: {
+          args: [8, 20],
+          msg: `Password must be between 8 to 10 characters in length`
+        }
       }
     },
     role: {
